@@ -1,6 +1,9 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
+            <div v-if="userFavs == 0">
+                <h2>No favorites images found.</h2>
+            </div>
             <div class="col-md-6 col-lg-4" v-for="photo in userFavs" :key="photo.id">
                 <div class="card mb-3" v-for='img in photosArray.slice(photo.imageId-1,photo.imageId)' :key='img.id'>
                     <div class="card-body text-center">
@@ -47,6 +50,7 @@
             removeUserFavorites(id){
                 axios.delete('/user_favorites/'+id).then((response)=>{
                     this.getUserFavorites();
+                    location.reload();
                 }).catch((error)=>{
                     console.log(error.message);
                 })
@@ -62,3 +66,9 @@
         }
     }
 </script>
+
+<style>
+.like-active, .like-active:hover, .like-active:focus, .like-active:active{
+    color: red;
+}
+</style>

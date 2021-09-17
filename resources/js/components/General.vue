@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div v-if="allPhotos == 0" class="row justify-content-center mt-3" style="font-size: 48px">
+            <p><i class="fas fa-spinner fa-spin"></i>  Loading...</p>            
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4" v-for='img in allPhotos.slice(0,num)' :key='img.id' >
                 <div class="card mb-3">
@@ -16,9 +19,10 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <button @click="photoSort();" class="btn btn-primary mt-3"> Load more</button>
+        <div v-if="allPhotos !=0" class="row justify-content-center">
+                <button @click="photoSort();" class="btn btn-primary mt-3"> Load more</button>
         </div>
+        
     </div>
 </template>
 
@@ -125,3 +129,8 @@
     }
 </script>
 
+<style>
+.like-active, .like-active:hover, .like-active:focus, .like-active:active{
+    color: red;
+}
+</style>
